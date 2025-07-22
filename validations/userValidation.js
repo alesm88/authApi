@@ -8,7 +8,7 @@ export const createUserSchema = Joi.object({
     .empty()
     .trim()
     .messages({
-        'string.required': `Le prenom est requis`,
+        'any.required': `Le prenom est requis`,
         'string.empty': `Le prenom est vide.`,
         'string.min': `Le prenom doit contenir au moins 2 caractères.`,
     }),
