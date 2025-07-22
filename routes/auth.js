@@ -1,5 +1,5 @@
 import express from 'express';
-import { register, login, verifyEmail, requestPasswordReset, resetPassword } from '../controllers/authController.js';
+import { register, login, verifyEmail, requestPasswordReset, resetPassword, resendVerificationEmail } from '../controllers/authController.js';
 import { authorize, protect } from '../middlewares/authMiddleware.js';
 import { validate } from '../middlewares/validate.js';
 import { createUserSchema } from '../validations/userValidation.js';
@@ -12,6 +12,8 @@ router.get('/verify/:token', verifyEmail);
 
 router.post('/password-reset-request', requestPasswordReset);
 router.post('/reset-password/:token', resetPassword);
+
+router.post("/resend-verification", resendVerificationEmail);
 
 router.get('/user-profile', protect, (req, res) => {
   res.json({ message: `Bienvenue ${req.user.name}` });

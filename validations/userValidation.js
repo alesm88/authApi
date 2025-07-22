@@ -34,6 +34,13 @@ export const createUserSchema = Joi.object({
       'string.min': `Le mot de passe doit contenir au moins 6 caractères.`,
       'string.empty': `Le mot de passe est requis.`,
     }),
+    confirmPassword: Joi.string()
+    .min(6)
+    .required()
+    .messages({
+      'string.min': `Le mot de passe doit contenir au moins 6 caractères.`,
+      'string.empty': `Le mot de passe est requis.`,
+    }),
     isVerified: Joi.boolean()
     .default(false)
     .valid(false)
