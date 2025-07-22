@@ -5,10 +5,12 @@ export const createUserSchema = Joi.object({
     .min(2)
     .max(50)
     .required()
+    .empty()
     .trim()
     .messages({
-      'string.empty': `Le prenom est requis.`,
-      'string.min': `Le prenom doit contenir au moins 2 caractères.`,
+        'string.required': `Le prenom est requis`,
+        'string.empty': `Le prenom est vide.`,
+        'string.min': `Le prenom doit contenir au moins 2 caractères.`,
     }),
     lastname: Joi.string()
     .min(2)
