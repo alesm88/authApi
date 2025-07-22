@@ -32,7 +32,7 @@ export async function register(req, res) {
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    const newUser = new User({
+    /* const newUser = new User({
       name,
       lastname,
       email,
@@ -40,7 +40,9 @@ export async function register(req, res) {
       role: role || "user",
       avatar,
       isVerified: false,
-    });
+    }); */
+
+    const newUser = new User(req.validatedBody);
 
     await newUser.save();
 
