@@ -7,6 +7,7 @@ import deleteUserCron from "./middlewares/deleteUser.js";
 import auditDependencies from './middlewares/auditDependencies.js'
 import helmet from 'helmet';
 import cors from 'cors';
+import { loginLimiter } from './middlewares/rateLimiter.js';
 
 dotenv.config();
 
@@ -24,7 +25,7 @@ app.use(cors());
 deleteUserCron.start();
 auditDependencies.start()
 
-app.use('/api/auth', authRoutes);
+app.use('/api/auth', loginLimiter, authRoutes);
 
 const PORT = process.env.PORT || 5000;
 
