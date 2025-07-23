@@ -38,9 +38,16 @@ export const createUserSchema = Joi.object({
         .messages({
             'string.empty': `Le mot de passe est vide.`,
             'any.required': `Le mot de passe est requis`,
-            'string.pattern': `Le mot de passe ne doit pas avoir des caracteres speciaux.`,
+            'string.pattern.base': `Le mot de passe ne doit pas avoir des caracteres speciaux.`,
         }),
-    confirmPassword: Joi.ref('password'),
+    confirmPassword: Joi.string()
+        .required() // On mes required car cela s'applique INDIVIDUELLEMENT A CHAQUE CHAMP, ON NE PEUT PAS PRENDRE CELUI DE password
+        .valid(Joi.ref('password'))
+        .messages({
+            'string.empty': `Le mot de passe est vide.`,
+            'any.required': `Le mot de passe est requis`,
+            'any.only': `Les mots de passe ne correspondent pas.`,
+        }),
     isVerified: Joi.boolean()
         .default(false)
         .valid(false)
